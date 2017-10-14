@@ -1,5 +1,7 @@
 package kekify.io.hackteam.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,11 @@ import kekify.io.hackteam.R;
 import kekify.io.hackteam.models.CandidatesItem;
 
 public class CandidatesActivity extends AppCompatActivity {
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, CandidatesActivity.class);
+        context.startActivity(starter);
+    }
 
     @BindView(R.id.candidatesView)
     PlaceHolderView candidatesView;

@@ -135,6 +135,7 @@
         <kekify.io.hackteam.CircleSurface
             android:layout_gravity="center_horizontal"
             android:id="@+id/sv_camera"
+            android:layout_marginTop="100dp"
             android:layout_marginLeft="45dp"
             android:layout_width="300dp"
             android:layout_height="533dp" />
@@ -146,10 +147,11 @@
         android:id="@+id/b_next_step"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="?attr/selectableItemBackground"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent"
         android:text="Next"
+        android:layout_margin="8dp"
         android:textColor="@color/colorAccent"
-        android:textSize="20dp" />
+        android:textSize="25dp" />
 
 </RelativeLayout>

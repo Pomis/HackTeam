@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="kekify.io.hackteam.activities.CandidatesActivity">
 
 
+    <TextView
+        android:id="@+id/tv_role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="10.7sp"
+        android:text="Role"
+        android:textColor="#ffffff"
+        android:textSize="26.7sp" />
+
     <com.mindorks.placeholderview.PlaceHolderView
+        android:layout_marginTop="100dp"
         android:id="@+id/candidatesView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:orientation="horizontal"
         />
 
+    <Button
+        android:id="@+id/b_send"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</FrameLayout>
+</RelativeLayout>
