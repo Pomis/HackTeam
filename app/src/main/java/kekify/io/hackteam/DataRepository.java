@@ -1,13 +1,17 @@
 package kekify.io.hackteam;
 
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.AccessTokenResponse;
+import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.TwistUser;
 import kekify.io.hackteam.models.User;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.Query;
 
 
 public class DataRepository {
@@ -34,6 +38,14 @@ public class DataRepository {
 
     public Single<TwistUser> getUserInfo(String access_token) {
         return apiInterface.getUserInfo("Bearer " + access_token);
+    }
+
+    public Single<Integer> createProject(Project project, int twistId) {
+        return apiInterface.createProject(project, twistId);
+    }
+
+    public Single<List<User>> searchCandidates(Integer projectId) {
+        return apiInterface.searchCandidates(projectId);
     }
 
 }

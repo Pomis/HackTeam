@@ -46,4 +46,13 @@ public class PreferencesWrapper {
                 .edit()
                 .putString("email", email).apply();
     }
+
+    public Integer getProjectId() {
+        return sharedPreferences.getInt("projectId", 0);
+    }
+    public void setProjectId(int projectId) {
+        sharedPreferences
+                .edit()
+                .putInt("projectId", projectId).apply();
+    }
 }

@@ -19,6 +19,7 @@ import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
 import java.io.File;
+import java.util.List;
 
 import kekify.io.hackteam.R;
 
@@ -49,28 +50,32 @@ public class CandidatesItem {
     private int avatarUrl;
     private Context context;
     private PlaceHolderView placeHolderView;
-    private String name;
-    private String surname;
+    private String fullname;
     private String skills;
-    private String roles;
+    private List<String> roles;
 
 
-    public CandidatesItem(int avatarUrl, Context context, PlaceHolderView placeHolderView,
-                          String name, String surname, String skills, String roles) {
-        this.avatarUrl = avatarUrl;
+    public CandidatesItem(Context context, PlaceHolderView placeHolderView, String fullname, String skills, List<String> roles) {
         this.context = context;
         this.placeHolderView = placeHolderView;
-        this.name = name;
-        this.surname = surname;
+        this.fullname = fullname;
         this.skills = skills;
         this.roles = roles;
     }
 
     @Resolve
     private void onResolved() {
-        Glide.with(context).load(avatarUrl).apply(RequestOptions.circleCropTransform()).into(iv_avatar);
-        tv_name.setText(name + " " + surname);
-        tvRoles.setText(roles);
+        //Glide.with(context).load(avatarUrl).apply(RequestOptions.circleCropTransform()).into(iv_avatar);
+        tv_name.setText(fullname);
+
+        String s_roles = "";
+        for (int i = 0; i < roles.size(); i++) {
+            s_roles += roles.get(i);
+            if (i != roles.size() - 1)
+                s_roles += ", ";
+        }
+
+        tvRoles.setText(s_roles);
         String[] skillArray = skills.split(";");
         phvSkills.getBuilder().setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
 
