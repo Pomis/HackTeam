@@ -33,6 +33,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.+'
+    compile 'com.xiaofeng.android:flowlayoutmanager:1.2.3.2'
+    compile 'com.splitwise:tokenautocomplete:2.0.8@aar'
+    compile 'rongi.rotate-layout:rotate-layout:3.0.0'
+    compile 'com.github.christophesmet:android_maskable_layout:-SNAPSHOT'
+
+
     testCompile 'junit:junit:4.12'
 //    compile 'com.otaliastudios:cameraview:1.2.3'
     compile 'com.otaliastudios:cameraview:1.0.0'
