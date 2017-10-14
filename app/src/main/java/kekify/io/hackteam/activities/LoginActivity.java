@@ -8,11 +8,21 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Completable;
+import kekify.io.hackteam.App;
+import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
+import kekify.io.hackteam.RxUtils;
+import kekify.io.hackteam.models.AccessTokenRequest;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private DataRepository repository;
 
     @BindView(R.id.wv_auth_page)
     WebView webView;
@@ -37,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
         String url = "https://twistapp.com/oauth/authorize?";
-        loadUrl(url + "client_id=" + "2850e856d2a4460d3330eab29c5e4df079f"
+        loadUrl(url + "client_id=" + App.TWIST_CLIENT_ID
          + "&scope=" + "messages:read&state=state");
     }
 
@@ -66,16 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                 hasUrlLoaded = true;
 
                 if (url.contains("&code=")) {
-                    if (url.contains("&state")) {
-                        code = url.substring(url.indexOf("?code=") + 40, url.indexOf("&"));
-                    } else {
-                        code = url.substring(url.indexOf("?code=") + 40, url.length());
-                    }
+                    code = url.substring(url.indexOf("&code=") + 6, url.length());
 
-                    //presenter.onInitialCodeReceived(code);
-                    System.out.println("_____CODE______" + code);
+                    onInitialCodeReceived(code);
                     finish();
-
 
                     return true;
 
@@ -123,7 +127,32 @@ public class LoginActivity extends AppCompatActivity {
 
     public void setAuthResult(int result) {
         setResult(result);
-        //finish()
+        System.out.println(App.getAppInstance().getPreferencesWrapper().getAuthToken("twist").split(":")[1]);
+        finish();
+    }
+
+    public void onInitialCodeReceived(String code) {
+
+        getAndSaveAccessCode(code)
+                .compose(RxUtils.applyCompletableSchedulers())
+                .subscribe(() -> {
+                            setAuthResult(-1);
+                        },
+                        throwable -> {
+                            setAuthResult(0);
+                        });
+    }
+
+    public Completable getAndSaveAccessCode(String code) {
+        repository = new DataRepository();
+
+        return repository.getUserCode(App.TWIST_CLIENT_ID, App.TWIST_CLIENT_SECRET, code)
+                .doOnSuccess(accessTokenResponse -> {
+                    App.getAppInstance()
+                            .getPreferencesWrapper()
+                            .setAuthToken("twist", accessTokenResponse.getAccessToken());
+                })
+                .toCompletable();
     }
 
 }
