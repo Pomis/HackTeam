@@ -12,23 +12,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/avatar"
-            android:layout_margin="10dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Djavid Khalilov"
-            android:layout_toEndOf="@id/iv_avatar"
-            android:layout_toRightOf="@id/iv_avatar"
-            android:layout_marginTop="10dp"
-            />
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/avatar"
+                android:layout_margin="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Djavid Khalilov"
+                android:layout_gravity="center_vertical"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
