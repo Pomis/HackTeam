@@ -229,9 +229,9 @@ public class WizardFragment extends Fragment {
 
     private String getSkills() {
         String res = "";
-        for (int i = 0; i < skillAdapter.getCount(); i++) {
-            res += skillAdapter.getItem(i).name;
-            if (i < skillAdapter.getCount() - 1)
+        for (int i = 0; i < searchView.skills.size(); i++) {
+            res += searchView.skills.get(i);
+            if (i < searchView.skills.size() - 1)
                 res += ";";
         }
         return res;

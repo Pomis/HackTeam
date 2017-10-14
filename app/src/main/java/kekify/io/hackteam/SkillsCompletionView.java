@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.tokenautocomplete.TokenCompleteTextView;
 
+import java.util.ArrayList;
+
 import kekify.io.hackteam.models.RoleItem;
 import kekify.io.hackteam.models.SkillItem;
 
@@ -22,13 +24,14 @@ public class SkillsCompletionView extends TokenCompleteTextView<SkillItem> {
         super(context, attrs);
     }
 
+    public ArrayList<String> skills = new ArrayList<>();
+
     @Override
     protected View getViewForObject(SkillItem skill) {
-
         LayoutInflater l = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         TextView view = (TextView) l.inflate(R.layout.item_role, (ViewGroup) getParent(), false).findViewById(R.id.tv_role);
         view.setText(skill.name);
-
+        skills.add(skill.name);
         return view;
     }
 
