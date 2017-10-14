@@ -1,16 +1,19 @@
 package kekify.io.hackteam;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.AccessTokenResponse;
+import kekify.io.hackteam.models.User;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 
 
 public class DataRepository {
-    ApiInterface apiInterface;
 
-    public DataRepository(ApiInterface apiInterface) {
+    private ApiInterface apiInterface;
+
+    private DataRepository(ApiInterface apiInterface) {
         this.apiInterface = apiInterface;
     }
 
@@ -23,4 +26,9 @@ public class DataRepository {
                                                    @Field("code") String code) {
         return apiInterface.getUserCode(client_id, client_secret, code);
     }
+
+    public Completable createUser(User user) {
+        return apiInterface.createUser(user);
+    }
+
 }
