@@ -49,6 +49,7 @@ public class RoleItem {
     @Click(R.id.f_role)
     void onClick() {
         if (clicked) {
+            clicked = false;
             textViewInversed.animate().alpha(0).setDuration(500).start();
             textView.animate().alpha(1).setDuration(300).start();
             selected.remove(name);
