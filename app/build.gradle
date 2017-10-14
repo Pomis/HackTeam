@@ -30,4 +30,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 //    compile 'com.otaliastudios:cameraview:1.2.3'
 
+    //placeholderview
+    compile 'com.mindorks:placeholderview:0.7.1'
 }
