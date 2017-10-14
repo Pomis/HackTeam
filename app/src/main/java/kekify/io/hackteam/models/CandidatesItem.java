@@ -1,6 +1,7 @@
 package kekify.io.hackteam.models;
 
 import android.content.Context;
+import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,8 @@ import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
+import java.io.File;
+
 import kekify.io.hackteam.R;
 
 /**
@@ -23,7 +26,7 @@ import kekify.io.hackteam.R;
  */
 
 
-@Animate(Animation.CARD_LEFT_IN_DESC)
+//@Animate(Animation.CARD_LEFT_IN_DESC)
 @NonReusable
 @Layout(R.layout.candidates_item)
 public class CandidatesItem {
@@ -33,14 +36,14 @@ public class CandidatesItem {
     @View(R.id.tv_name)
     private TextView tv_name;
 
-    private String avatarUrl;
+    private int avatarUrl;
     private Context context;
     private PlaceHolderView placeHolderView;
     private String name;
     private String surname;
 
 
-    public CandidatesItem(String avatarUrl, Context context, PlaceHolderView placeHolderView, String name, String surname) {
+    public CandidatesItem(int avatarUrl, Context context, PlaceHolderView placeHolderView, String name, String surname) {
         this.avatarUrl = avatarUrl;
         this.context = context;
         this.placeHolderView = placeHolderView;
