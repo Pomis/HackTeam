@@ -28,7 +28,7 @@ public class DataRepository {
         return apiInterface.getUserCode(client_id, client_secret, code);
     }
 
-    public Completable createUser(User user) {
+    public Single<Integer> createUser(User user) {
         return apiInterface.createUser(user);
     }
 

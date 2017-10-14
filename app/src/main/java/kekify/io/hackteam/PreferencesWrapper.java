@@ -20,6 +20,15 @@ public class PreferencesWrapper {
                 .putString(authType, token).apply();
     }
 
+    public Integer getTwistId() {
+        return sharedPreferences.getInt("twistId", 0);
+    }
+    public void setTwistId(Integer id) {
+        sharedPreferences
+                .edit()
+                .putInt("twistId", id).apply();
+    }
+
     public Integer getId() {
         return sharedPreferences.getInt("id", 0);
     }

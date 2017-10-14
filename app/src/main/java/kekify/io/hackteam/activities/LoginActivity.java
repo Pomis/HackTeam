@@ -10,9 +10,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Completable;
@@ -21,7 +18,6 @@ import kekify.io.hackteam.App;
 import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
 import kekify.io.hackteam.RxUtils;
-import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.TwistUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -154,7 +150,9 @@ public class LoginActivity extends AppCompatActivity {
                             .compose(RxUtils.applySingleSchedulers())
                             .subscribe(user -> {
                                 App.getAppInstance().getPreferencesWrapper().setEmail(user.getEmail());
-                                App.getAppInstance().getPreferencesWrapper().setId(user.getId());
+                                App.getAppInstance().getPreferencesWrapper().setTwistId(user.getId());
+                                System.out.println("Set email:" + user.getEmail());
+                                System.out.println("Set twistId:" + user.getId());
                             });
 
                 }, error -> {

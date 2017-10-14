@@ -1,8 +1,6 @@
 package kekify.io.hackteam.fragments;
 
-
 import android.Manifest;
-import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +10,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -37,7 +34,6 @@ import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
 import kekify.io.hackteam.RxUtils;
 import kekify.io.hackteam.SkillsCompletionView;
-import kekify.io.hackteam.activities.CandidatesActivity;
 import kekify.io.hackteam.activities.ChooseActivity;
 import kekify.io.hackteam.models.RoleItem;
 import kekify.io.hackteam.models.SkillItem;
@@ -47,12 +43,9 @@ import static kekify.io.hackteam.fragments.WizardFragment.Step.KEYWORDS;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.NAME;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.ROLE;
 
-import kekify.io.hackteam.activities.LoginActivity;
 import kekify.io.hackteam.models.User;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class WizardFragment extends Fragment {
 
     @BindView(R.id.ll_first)
@@ -155,7 +148,7 @@ public class WizardFragment extends Fragment {
 
         User user = new User(metName.getText().toString(), getSkills(), roles);
         user.setTwist_email(App.getAppInstance().getPreferencesWrapper().getEmail());
-        user.setTwist_id(App.getAppInstance().getPreferencesWrapper().getId());
+        user.setTwist_id(App.getAppInstance().getPreferencesWrapper().getTwistId());
 
         System.out.println(user);
 
@@ -241,10 +234,13 @@ public class WizardFragment extends Fragment {
         DataRepository repository = new DataRepository();
 
         repository.createUser(user)
-                .compose(RxUtils.applyCompletableSchedulers())
-                .subscribe(() -> {
+                .compose(RxUtils.applySingleSchedulers())
+                .subscribe(id -> {
                     Toast.makeText(getContext(),
                             "You have successfully registered!", Toast.LENGTH_SHORT);
+
+                    App.getAppInstance().getPreferencesWrapper().setId(id);
+                    System.out.println("Set id: " + id);
                 }, error -> {
                     error.printStackTrace();
                     Toast.makeText(getContext(),
