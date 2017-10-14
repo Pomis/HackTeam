@@ -25,6 +25,7 @@ public class RoleItem {
     String name;
     Context context;
     ArrayList<String> selected;
+    boolean clicked = false;
 
     @View(R.id.tv_role)
     transient TextView textView;
@@ -45,10 +46,18 @@ public class RoleItem {
         textViewInversed.setText(name);
     }
 
-    @Click(R.id.tv_role)
+    @Click(R.id.f_role)
     void onClick() {
-        textView.animate().alpha(0).setDuration(500).start();
-        textViewInversed.animate().alpha(1).setDuration(300).start();
-        selected.add(name);
+        if (clicked) {
+            textViewInversed.animate().alpha(0).setDuration(500).start();
+            textView.animate().alpha(1).setDuration(300).start();
+            selected.remove(name);
+        } else {
+            clicked = true;
+            textView.animate().alpha(0).setDuration(500).start();
+            textViewInversed.animate().alpha(1).setDuration(300).start();
+            selected.add(name);
+        }
+
     }
 }
