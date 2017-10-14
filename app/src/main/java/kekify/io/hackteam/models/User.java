@@ -42,6 +42,12 @@ public class User {
         this.roles = roles;
     }
 
+    public User(String name, String skills, List<String> roles) {
+        this.name = name;
+        this.skills = skills;
+        this.roles = roles;
+    }
+
 
     public String getName() {
         return name;

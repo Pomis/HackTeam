@@ -11,6 +11,8 @@ import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
+import java.util.ArrayList;
+
 import kekify.io.hackteam.R;
 
 /**
@@ -22,6 +24,7 @@ import kekify.io.hackteam.R;
 public class RoleItem {
     String name;
     Context context;
+    ArrayList<String> selected;
 
     @View(R.id.tv_role)
     transient TextView textView;
@@ -30,9 +33,10 @@ public class RoleItem {
     transient TextView textViewInversed;
 
 
-    public RoleItem(String name, Context context) {
+    public RoleItem(String name, Context context, ArrayList<String> selected) {
         this.name = name;
         this.context = context;
+        this.selected = selected;
     }
 
     @Resolve
@@ -45,5 +49,6 @@ public class RoleItem {
     void onClick() {
         textView.animate().alpha(0).setDuration(500).start();
         textViewInversed.animate().alpha(1).setDuration(300).start();
+        selected.add(name);
     }
 }
