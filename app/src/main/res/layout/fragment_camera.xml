@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context="kekify.io.hackteam.fragments.CameraFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.otaliastudios.cameraview.CameraView
+        android:id="@+id/camera"
+        android:keepScreenOn="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
