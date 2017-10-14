@@ -4,6 +4,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.AccessTokenResponse;
+import kekify.io.hackteam.models.TwistUser;
 import kekify.io.hackteam.models.User;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -29,6 +30,10 @@ public class DataRepository {
 
     public Completable createUser(User user) {
         return apiInterface.createUser(user);
+    }
+
+    public Single<TwistUser> getUserInfo(String access_token) {
+        return apiInterface.getUserInfo("Bearer " + access_token);
     }
 
 }

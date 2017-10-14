@@ -20,6 +20,10 @@ public class User {
     @Expose
     private int twist_id;
 
+    @SerializedName("twist_email")
+    @Expose
+    private String twist_email;
+
     @SerializedName("name")
     @Expose
     private String name;
@@ -32,15 +36,6 @@ public class User {
     @Expose
     private List<String> roles;
 
-
-    public User(int id, int project_id, int twist_id, String name, String skills, List<String> roles) {
-        this.id = id;
-        this.project_id = project_id;
-        this.twist_id = twist_id;
-        this.name = name;
-        this.skills = skills;
-        this.roles = roles;
-    }
 
     public User(String name, String skills, List<String> roles) {
         this.name = name;
@@ -89,5 +84,12 @@ public class User {
     }
     public void setTwist_id(int twist_id) {
         this.twist_id = twist_id;
+    }
+
+    public String getTwist_email() {
+        return twist_email;
+    }
+    public void setTwist_email(String twist_email) {
+        this.twist_email = twist_email;
     }
 }

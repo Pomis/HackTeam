@@ -29,6 +29,7 @@ import static kekify.io.hackteam.activities.ChooseActivity.State.IDEA;
 import static kekify.io.hackteam.activities.ChooseActivity.State.ROLES;
 import static kekify.io.hackteam.activities.ChooseActivity.State.SOLO;
 
+
 public class ChooseActivity extends AppCompatActivity {
     @BindView(R.id.met_idea)
     MaterialEditText metIdea;
