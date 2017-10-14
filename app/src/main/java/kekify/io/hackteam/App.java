@@ -2,6 +2,7 @@ package kekify.io.hackteam;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -16,14 +17,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
+    public static final String TWIST_CLIENT_ID = "2850e856d2a4460d3330eab29c5e4df079f";
+    public static final String TWIST_CLIENT_SECRET = "285571fdaa9756bbd2a5ab8b05b980f2d2a";
+
     private static App appInstance;
     private ApiInterface apiInterface;
+    private SharedPreferences sharedPreferences;
+    public static String SHARED_PREFERENCES_CODE="hackteam";
 
 
     @Override
     public void onCreate() {
+        getPreferencesWrapper();
         super.onCreate();
-
         appInstance = (App) getApplicationContext();
     }
 
@@ -40,7 +46,7 @@ public class App extends Application {
         httpClient.addInterceptor(logging);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://blockchain.info/")
+                .baseUrl("https://twistapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(httpClient.build())
@@ -54,7 +60,16 @@ public class App extends Application {
     }
 
     public static App getAppInstance() {
+
         return appInstance;
+    }
+
+    public SharedPreferences getRawPreferences() {
+        return getSharedPreferences(SHARED_PREFERENCES_CODE, MODE_PRIVATE);
+    }
+
+    public PreferencesWrapper getPreferencesWrapper() {
+        return new PreferencesWrapper(getRawPreferences());
     }
 
 }
