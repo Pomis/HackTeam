@@ -32,7 +32,6 @@ import kekify.io.hackteam.CircleSurface;
 import kekify.io.hackteam.R;
 import kekify.io.hackteam.SkillsCompletionView;
 import kekify.io.hackteam.activities.CandidatesActivity;
-import kekify.io.hackteam.activities.ChooseActivity;
 import kekify.io.hackteam.models.RoleItem;
 import kekify.io.hackteam.models.SkillItem;
 
@@ -40,7 +39,9 @@ import static kekify.io.hackteam.fragments.WizardFragment.Step.CAMERA;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.KEYWORDS;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.NAME;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.ROLE;
+=======
 import kekify.io.hackteam.activities.LoginActivity;
+>>>>>>> 90d58b5891794f8b93fea6b1ac9ae198281d0451
 
 /**
  * A simple {@link Fragment} subclass.
@@ -143,9 +144,7 @@ public class WizardFragment extends Fragment {
 
 
     void openDashboard() {
-//        Intent intent = new Intent(getContext(), CandidatesActivity.class);
-//        startActivity(intent);
-        ChooseActivity.start(getContext());
+        Intent intent = new Intent(getContext(), CandidatesActivity.class);
     }
 
     @OnClick(R.id.b_next_step)
