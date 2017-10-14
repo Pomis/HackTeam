@@ -39,4 +39,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     //placeholderview
     compile 'com.mindorks:placeholderview:0.7.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

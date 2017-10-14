@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kekify.io.hackteam.fragments.WizardFragment">
+
+    <ImageView
+        android:src="@drawable/bg_rega"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26.7sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="10.7sp"
+        android:gravity="center_horizontal"
+        android:text="Welcome to hackTeam \nNice to meet you:"
+        />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/met_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/tv_label"
+        android:layout_marginRight="24dp"
+        android:hint="Full name"
+        android:paddingBottom="-8dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        app:met_baseColor="@color/colorAccent"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Search for goods"
+        app:met_iconLeft="@drawable/ic_profile"
+        app:met_iconPadding="0dp"
+        app:met_primaryColor="@color/colorAccent"
+        app:met_singleLineEllipsis="true"
+        app:met_textColor="@color/colorAccent"
+        app:met_textColorHint="@color/colorAccent"
+        app:met_underlineColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/b_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorAccent"
+        android:text="Next"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
