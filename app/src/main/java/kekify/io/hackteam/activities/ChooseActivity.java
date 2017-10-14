@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mindorks.placeholderview.PlaceHolderView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -21,7 +22,10 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kekify.io.hackteam.App;
+import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
+import kekify.io.hackteam.RxUtils;
 import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.RoleItem;
 
@@ -110,10 +114,22 @@ public class ChooseActivity extends AppCompatActivity {
                 break;
 
             case ROLES:
-                Project project = new Project(
-                        metIdea.getText().toString(),
-                        roles
-                );
+                Project project = new Project(metIdea.getText().toString(), roles);
+
+                int id = App.getAppInstance().getPreferencesWrapper().getId();
+                DataRepository repository = new DataRepository();
+
+                repository.createProject(project, id)
+                        .compose(RxUtils.applySingleSchedulers())
+                        .subscribe(projectId -> {
+                            System.out.println("Set projectId" + project);
+                            App.getAppInstance().getPreferencesWrapper().setProjectId(projectId);
+                        }, error -> {
+                            error.printStackTrace();
+                            Toast.makeText(this.getApplicationContext(),
+                                    "Something gone wrong!", Toast.LENGTH_LONG).show();
+                        });
+
                 CandidatesActivity.start(this, roles);
                 break;
         }

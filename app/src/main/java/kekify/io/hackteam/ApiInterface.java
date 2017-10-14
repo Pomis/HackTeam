@@ -1,5 +1,7 @@
 package kekify.io.hackteam;
 
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
@@ -30,7 +32,10 @@ public interface ApiInterface {
     @GET("api/v2/users/getone")
     Single<TwistUser> getUserInfo(@Header("Authorization") String access_token);
 
-    @POST("api/projects")
-    Single<Integer> createProject(@Body Project project, @Query("user") int twistId);
+    @POST("http://hack-team.azurewebsites.net/api/projects")
+    Single<Integer> createProject(@Body Project project, @Query("user") int id);
+
+    @GET("http://hack-team.azurewebsites.net/api/Search")
+    Single<List<User>> searchCandidates(@Query("id") Integer projectId);
 
 }
