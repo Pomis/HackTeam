@@ -3,27 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="kekify.io.hackteam.activities.CandidatesActivity">
 
-
-    <TextView
-        android:id="@+id/tv_role"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="10.7sp"
-        android:text="Role"
-        android:textColor="#ffffff"
-        android:textSize="26.7sp" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_choose" />
+
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/spinner"
+        app:ms_background_color="@color/cardview_dark_background"
+        app:ms_text_color="@color/colorAccent"
+        android:textSize="26.7sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <com.mindorks.placeholderview.PlaceHolderView
         android:id="@+id/candidatesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="64dp"
         android:orientation="horizontal" />
 
     <Button

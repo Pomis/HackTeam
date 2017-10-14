@@ -36,6 +36,7 @@ dependencies {
     compile 'com.xiaofeng.android:flowlayoutmanager:1.2.3.2'
     compile 'com.splitwise:tokenautocomplete:2.0.8@aar'
     compile 'rongi.rotate-layout:rotate-layout:3.0.0'
+    compile 'com.jaredrummler:material-spinner:1.2.1'
 
 
     testCompile 'junit:junit:4.12'

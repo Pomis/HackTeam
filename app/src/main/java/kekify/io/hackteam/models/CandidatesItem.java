@@ -2,6 +2,7 @@ package kekify.io.hackteam.models;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +72,8 @@ public class CandidatesItem {
         tv_name.setText(name + " " + surname);
         tvRoles.setText(roles);
         String[] skillArray = skills.split(";");
+        phvSkills.getBuilder().setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
+
         for (String skill : skillArray) {
             phvSkills.addView(new SkillItem(skill));
         }

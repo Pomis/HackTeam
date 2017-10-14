@@ -113,7 +113,7 @@ public class ChooseActivity extends AppCompatActivity {
                         metIdea.getText().toString(),
                         roles
                 );
-                CandidatesActivity.start(this);
+                CandidatesActivity.start(this, roles);
                 break;
         }
     }
