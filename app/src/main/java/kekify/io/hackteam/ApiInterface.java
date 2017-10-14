@@ -4,6 +4,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.AccessTokenResponse;
+import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.TwistUser;
 import kekify.io.hackteam.models.User;
 import retrofit2.http.Body;
@@ -24,9 +25,12 @@ public interface ApiInterface {
                                             @Field("code") String code);
 
     @POST("http://hack-team.azurewebsites.net/api/Users")
-    Completable createUser(@Body User user);
+    Single<Integer> createUser(@Body User user);
 
     @GET("api/v2/users/getone")
     Single<TwistUser> getUserInfo(@Header("Authorization") String access_token);
+
+    @POST("api/projects")
+    Single<Integer> createProject(@Body Project project, @Query("user") int twistId);
 
 }
