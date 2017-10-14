@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kekify.io.hackteam.R;
+import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.RoleItem;
 
 import static kekify.io.hackteam.activities.ChooseActivity.State.CHOOSE;
@@ -108,6 +109,10 @@ public class ChooseActivity extends AppCompatActivity {
                 break;
 
             case ROLES:
+                Project project = new Project(
+                        metIdea.getText().toString(),
+                        roles
+                );
                 CandidatesActivity.start(this);
                 break;
         }
