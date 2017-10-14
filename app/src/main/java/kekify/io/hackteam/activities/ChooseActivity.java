@@ -90,7 +90,8 @@ public class ChooseActivity extends AppCompatActivity {
     @OnClick(R.id.rl_group)
     void group() {
         currentState = IDEA;
-
+        metIdea.setEnabled(true);
+        metIdea.setVisibility(View.VISIBLE);
         moveAway(tvLabel, 150);
         moveAway(rlSolo, 50);
         moveAway(rlGroup, 0);
