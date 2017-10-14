@@ -1,5 +1,6 @@
 package kekify.io.hackteam.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -98,8 +99,17 @@ public class LoginActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (webView.canGoBack())
             webView.goBack();
-        else
-            super.onBackPressed();
+        else {
+            quit();
+        }
+    }
+
+    public void quit() {
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(startMain);
     }
 
     public void showProgressbar() {
