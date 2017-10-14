@@ -36,6 +36,9 @@ public class CandidatesItem {
     @View(R.id.tv_name)
     private TextView tv_name;
 
+    @View(R.id.tv_roles)
+    private TextView tvRoles;
+
     @View(R.id.phv_roles)
     private PlaceHolderView phvRoles;
 
@@ -66,9 +69,10 @@ public class CandidatesItem {
     private void onResolved() {
         Glide.with(context).load(avatarUrl).apply(RequestOptions.circleCropTransform()).into(iv_avatar);
         tv_name.setText(name + " " + surname);
+        tvRoles.setText(roles);
         String[] skillArray = skills.split(";");
         for (String skill : skillArray) {
-            phvRoles.addView(new SkillItem(skill));
+            phvSkills.addView(new SkillItem(skill));
         }
     }
 

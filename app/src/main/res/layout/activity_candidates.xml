@@ -20,20 +20,19 @@
         android:textSize="26.7sp" />
 
     <com.mindorks.placeholderview.PlaceHolderView
-        android:layout_marginTop="100dp"
         android:id="@+id/candidatesView"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="horizontal"
-        />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal" />
 
     <Button
         android:id="@+id/b_send"
-        android:text="Send an invitation"
-        android:layout_margin="16dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_role"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_role"
+        android:text="Send an invitation" />
 
 </RelativeLayout>
