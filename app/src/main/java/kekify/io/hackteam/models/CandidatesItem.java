@@ -36,25 +36,40 @@ public class CandidatesItem {
     @View(R.id.tv_name)
     private TextView tv_name;
 
+    @View(R.id.phv_roles)
+    private PlaceHolderView phvRoles;
+
+    @View(R.id.phv_skills)
+    private PlaceHolderView phvSkills;
+
     private int avatarUrl;
     private Context context;
     private PlaceHolderView placeHolderView;
     private String name;
     private String surname;
+    private String skills;
+    private String roles;
 
 
-    public CandidatesItem(int avatarUrl, Context context, PlaceHolderView placeHolderView, String name, String surname) {
+    public CandidatesItem(int avatarUrl, Context context, PlaceHolderView placeHolderView,
+                          String name, String surname, String skills, String roles) {
         this.avatarUrl = avatarUrl;
         this.context = context;
         this.placeHolderView = placeHolderView;
         this.name = name;
         this.surname = surname;
+        this.skills = skills;
+        this.roles = roles;
     }
 
     @Resolve
     private void onResolved() {
         Glide.with(context).load(avatarUrl).apply(RequestOptions.circleCropTransform()).into(iv_avatar);
         tv_name.setText(name + " " + surname);
+        String[] skillArray = skills.split(";");
+        for (String skill : skillArray) {
+            phvRoles.addView(new SkillItem(skill));
+        }
     }
 
     @Click(R.id.card_candidates)

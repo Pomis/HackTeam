@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_margin="4dp"
+    android:id="@+id/f_role"
+    android:layout_height="50dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:alpha="0"
+        android:id="@+id/tv_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_role_inverse"
+        android:padding="8dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp" />
+</FrameLayout>

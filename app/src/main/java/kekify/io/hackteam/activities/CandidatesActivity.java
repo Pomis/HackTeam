@@ -45,9 +45,9 @@ public class CandidatesActivity extends AppCompatActivity {
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         candidatesView.addView(new CandidatesItem(R.drawable.avatar, this.getApplicationContext(),
-                candidatesView, "Djavid", "Khalilov"));
+                candidatesView, "Djavid", "Khalilov", "Android dev", "Java;Gradle;Retrofit"));
         candidatesView.addView(new CandidatesItem(R.drawable.avatar2, this.getApplicationContext(),
-                candidatesView, "Aleksandr", "Naumov"));
+                candidatesView, "Aleksandr", "Naumov", "Designer", "Sketch;Zeplin"));
 
     }
 

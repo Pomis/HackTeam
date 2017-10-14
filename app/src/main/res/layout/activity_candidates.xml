@@ -29,6 +29,7 @@
 
     <Button
         android:id="@+id/b_send"
+        android:text="Send an invitation"
         android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_role"

@@ -26,12 +26,12 @@
         android:textSize="26.7sp" />
 
     <RelativeLayout
-        android:layout_marginTop="30dp"
         android:id="@+id/rl_solo"
         android:layout_width="200dp"
-        android:layout_centerHorizontal="true"
         android:layout_height="200dp"
         android:layout_below="@id/tv_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_role">
 
 
@@ -46,9 +46,9 @@
 
 
         <TextView
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="40dp"
             android:gravity="center_horizontal"
             android:text="Looking for team"
@@ -57,12 +57,12 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="30dp"
         android:id="@+id/rl_group"
         android:layout_width="200dp"
-        android:layout_centerHorizontal="true"
         android:layout_height="200dp"
         android:layout_below="@id/rl_solo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_role">
 
 
@@ -77,9 +77,9 @@
 
 
         <TextView
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="40dp"
             android:gravity="center_horizontal"
             android:text="Creating team"
@@ -88,36 +88,121 @@
     </RelativeLayout>
 
 
+    <LinearLayout
+        android:id="@+id/ll_idea_first"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:orientation="vertical"
+        android:translationX="1500dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="10.7sp"
+            android:text="Explain your idea first"
+            android:textColor="#ffffff"
+            android:textSize="26.7sp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_idea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="50dp"
+            android:hint="My idea is..."
+            android:paddingBottom="-8dp"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            app:met_baseColor="@color/colorAccent"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="My idea is..."
+            app:met_iconLeft="@drawable/ic_profile"
+            app:met_iconPadding="0dp"
+            app:met_primaryColor="@color/colorAccent"
+            app:met_textColor="@color/colorAccent"
+            app:met_textColorHint="@color/colorAccent"
+            app:met_underlineColor="@color/colorAccent" />
+
+
+    </LinearLayout>
+
 
     <TextView
-        android:translationX="1500dp"
-        android:alpha="0"
         android:id="@+id/tv_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:layout_marginTop="150dp"
+        android:alpha="0"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="10.7sp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="Empty"
         android:textColor="#ffffff"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:translationX="1500dp" />
 
     <TextView
-        android:translationX="1500dp"
-        android:alpha="0"
         android:id="@+id/tv_soon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:layout_marginTop="250dp"
+        android:alpha="0"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="10.7sp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="Soon there will be variety of teams"
         android:textColor="#ffffff"
-        android:textSize="26.7sp" />
+        android:textSize="26.7sp"
+        android:translationX="1500dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_idea_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:orientation="vertical"
+        android:translationX="1500dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="10.7sp"
+            android:text="Let’s form team. Select the required roles:"
+            android:textColor="#ffffff"
+            android:textSize="26.7sp" />
+
+        <com.mindorks.placeholderview.PlaceHolderView
+            android:id="@+id/phv_roles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/b_next_step"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:text="Next"
+        android:textColor="@color/colorAccent"
+        android:textSize="25dp"
+        android:translationX="1500dp" />
 
 
 </RelativeLayout>

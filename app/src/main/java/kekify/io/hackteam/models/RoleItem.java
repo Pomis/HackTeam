@@ -60,4 +60,9 @@ public class RoleItem {
         }
 
     }
+
+    public RoleItem setClicked(boolean clicked) {
+        this.clicked = clicked;
+        return this;
+    }
 }
