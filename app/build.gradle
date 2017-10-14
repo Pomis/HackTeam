@@ -36,7 +36,6 @@ dependencies {
     compile 'com.xiaofeng.android:flowlayoutmanager:1.2.3.2'
     compile 'com.splitwise:tokenautocomplete:2.0.8@aar'
     compile 'rongi.rotate-layout:rotate-layout:3.0.0'
-    compile 'com.github.christophesmet:android_maskable_layout:-SNAPSHOT'
 
 
     testCompile 'junit:junit:4.12'
@@ -72,5 +71,6 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
 
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kekify.io.hackteam.activities.ChooseActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_choose" />
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="10.7sp"
+        android:text="What are you looking for?"
+        android:textColor="#ffffff"
+        android:textSize="26.7sp" />
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:id="@+id/rl_solo"
+        android:layout_width="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="200dp"
+        android:layout_below="@id/tv_label"
+        android:background="@drawable/bg_role">
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_person"
+            android:tint="@color/colorAccent" />
+
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:gravity="center_horizontal"
+            android:text="Looking for team"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:id="@+id/rl_group"
+        android:layout_width="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="200dp"
+        android:layout_below="@id/rl_solo"
+        android:background="@drawable/bg_role">
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_group"
+            android:tint="@color/colorAccent" />
+
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:gravity="center_horizontal"
+            android:text="Creating team"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_team"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_below="@id/iv_solo"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:background="@drawable/bg_role"-->
+        <!--android:padding="50dp"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:src="@drawable/ic_group"-->
+        <!--android:tint="@color/colorAccent" />-->
+</RelativeLayout>
