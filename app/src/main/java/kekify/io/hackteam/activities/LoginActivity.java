@@ -8,6 +8,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +16,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Completable;
+import io.reactivex.Single;
 import kekify.io.hackteam.App;
 import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
 import kekify.io.hackteam.RxUtils;
 import kekify.io.hackteam.models.AccessTokenRequest;
+import kekify.io.hackteam.models.TwistUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        repository = new DataRepository();
 
         setupWebView();
     }
@@ -146,15 +150,20 @@ public class LoginActivity extends AppCompatActivity {
         getAndSaveAccessCode(code)
                 .compose(RxUtils.applyCompletableSchedulers())
                 .subscribe(() -> {
-                            setAuthResult(-1);
-                        },
-                        throwable -> {
-                            setAuthResult(0);
-                        });
+                    getUserInfo()
+                            .compose(RxUtils.applySingleSchedulers())
+                            .subscribe(user -> {
+                                App.getAppInstance().getPreferencesWrapper().setEmail(user.getEmail());
+                                App.getAppInstance().getPreferencesWrapper().setId(user.getId());
+                            });
+
+                }, error -> {
+                    error.printStackTrace();
+                    Toast.makeText(this, "Something gone wrong!", Toast.LENGTH_LONG).show();
+                });
     }
 
     public Completable getAndSaveAccessCode(String code) {
-        repository = new DataRepository();
 
         return repository.getUserCode(App.TWIST_CLIENT_ID, App.TWIST_CLIENT_SECRET, code)
                 .doOnSuccess(accessTokenResponse -> {
@@ -163,6 +172,11 @@ public class LoginActivity extends AppCompatActivity {
                             .setAuthToken("twist", accessTokenResponse.getAccessToken());
                 })
                 .toCompletable();
+    }
+
+    public Single<TwistUser> getUserInfo() {
+        String access_token = App.getAppInstance().getPreferencesWrapper().getAuthToken("twist");
+        return repository.getUserInfo(access_token);
     }
 
 }

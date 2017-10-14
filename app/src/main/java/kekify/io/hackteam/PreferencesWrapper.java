@@ -20,13 +20,21 @@ public class PreferencesWrapper {
                 .putString(authType, token).apply();
     }
 
-    public String getDeviceId(String key) {
-        return sharedPreferences.getString(key, "");
+    public Integer getId() {
+        return sharedPreferences.getInt("id", 0);
     }
-
-    public void setDeviceId(String key, String id) {
+    public void setId(Integer id) {
         sharedPreferences
                 .edit()
-                .putString(key, id).apply();
+                .putInt("id", id).apply();
+    }
+
+    public String getEmail() {
+        return sharedPreferences.getString("email", "");
+    }
+    public void setEmail(String email) {
+        sharedPreferences
+                .edit()
+                .putString("email", email).apply();
     }
 }

@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import kekify.io.hackteam.App;
 import kekify.io.hackteam.CircleSurface;
 import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
@@ -152,13 +153,12 @@ public class WizardFragment extends Fragment {
 
     void openDashboard() {
 
-        User user = new User(
-                metName.getText().toString(),
-                getSkills(),
-                roles
-        );
+        User user = new User(metName.getText().toString(), getSkills(), roles);
+        user.setTwist_email(App.getAppInstance().getPreferencesWrapper().getEmail());
+        user.setTwist_id(App.getAppInstance().getPreferencesWrapper().getId());
 
         System.out.println(user);
+
         createUser(user);
 
         ChooseActivity.start(getContext());

@@ -18,6 +18,7 @@ import kekify.io.hackteam.R;
 import static kekify.io.hackteam.activities.ChooseActivity.State.CHOOSE;
 import static kekify.io.hackteam.activities.ChooseActivity.State.SOLO;
 
+
 public class ChooseActivity extends AppCompatActivity {
     enum State{
         CHOOSE, SOLO, GROUP
