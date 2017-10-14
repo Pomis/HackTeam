@@ -19,22 +19,22 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.mindorks.placeholderview.PlaceHolderView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.tokenautocomplete.FilteredArrayAdapter;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import kekify.io.hackteam.CircleSurface;
+import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
+import kekify.io.hackteam.RxUtils;
 import kekify.io.hackteam.SkillsCompletionView;
 import kekify.io.hackteam.activities.CandidatesActivity;
-import kekify.io.hackteam.activities.ChooseActivity;
 import kekify.io.hackteam.models.RoleItem;
 import kekify.io.hackteam.models.SkillItem;
 
@@ -42,7 +42,6 @@ import static kekify.io.hackteam.fragments.WizardFragment.Step.CAMERA;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.KEYWORDS;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.NAME;
 import static kekify.io.hackteam.fragments.WizardFragment.Step.ROLE;
-
 import kekify.io.hackteam.activities.LoginActivity;
 import kekify.io.hackteam.models.User;
 
@@ -67,8 +66,6 @@ public class WizardFragment extends Fragment {
     CircleSurface svCamera;
     @BindView(R.id.ll_fourth)
     LinearLayout llFourth;
-
-    public ArrayList<String> roles = new ArrayList<>();
 
     enum Step {
         NAME, ROLE, KEYWORDS, CAMERA
@@ -107,7 +104,7 @@ public class WizardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initList();
         ActivityCompat.requestPermissions(getActivity(),
-                new String[]{
+                new String[] {
                         Manifest.permission.CAMERA
                 },
                 123);
@@ -115,16 +112,16 @@ public class WizardFragment extends Fragment {
 
     private void initList() {
         phvRoles.getBuilder().setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
-        phvRoles.addView(new RoleItem("Team manager", getActivity(), roles));
-        phvRoles.addView(new RoleItem("iOS dev", getActivity(), roles));
-        phvRoles.addView(new RoleItem("Front-end dev", getActivity(), roles));
-        phvRoles.addView(new RoleItem("Designer", getActivity(), roles));
-        phvRoles.addView(new RoleItem("Analyst", getActivity(), roles));
-        phvRoles.addView(new RoleItem("Team supporter", getActivity(), roles));
-        phvRoles.addView(new RoleItem("Android dev", getActivity(), roles));
-        phvRoles.addView(new RoleItem("Back-end dev", getActivity(), roles));
-        phvRoles.addView(new RoleItem("ML/DL dev", getActivity(), roles));
-        phvRoles.addView(new RoleItem("Blockchain dev", getActivity(), roles));
+        phvRoles.addView(new RoleItem("Team manager", getContext()));
+        phvRoles.addView(new RoleItem("iOS dev", getContext()));
+        phvRoles.addView(new RoleItem("Front-end dev", getContext()));
+        phvRoles.addView(new RoleItem("Designer", getContext()));
+        phvRoles.addView(new RoleItem("Analyst", getContext()));
+        phvRoles.addView(new RoleItem("Team supporter", getContext()));
+        phvRoles.addView(new RoleItem("Android dev", getContext()));
+        phvRoles.addView(new RoleItem("Back-end dev", getContext()));
+        phvRoles.addView(new RoleItem("ML/DL dev", getContext()));
+        phvRoles.addView(new RoleItem("Blockchain dev", getContext()));
 
         SkillItem[] skillItems = new SkillItem[]{
                 new SkillItem("kekeke"),
@@ -148,15 +145,7 @@ public class WizardFragment extends Fragment {
 
 
     void openDashboard() {
-
-        User user = new User(
-                metName.getText().toString(),
-                getSkills(),
-                roles
-        );
-
-
-        ChooseActivity.start(getContext());
+        Intent intent = new Intent(getContext(), CandidatesActivity.class);
     }
 
     @OnClick(R.id.b_next_step)
@@ -221,14 +210,19 @@ public class WizardFragment extends Fragment {
 
     }
 
+    public void createUser(User user) {
+        DataRepository repository = new DataRepository();
 
-    private String getSkills() {
-        String res = "";
-        for (int i = 0; i < skillAdapter.getCount(); i++) {
-            res += skillAdapter.getItem(i).name;
-            if (i < skillAdapter.getCount() - 1)
-                res += ";";
-        }
-        return res;
+        repository.createUser(user)
+                .compose(RxUtils.applyCompletableSchedulers())
+                .subscribe(() -> {
+                    Toast.makeText(getContext(),
+                            "You have successfully registered!", Toast.LENGTH_SHORT);
+                }, error -> {
+                    error.printStackTrace();
+                    Toast.makeText(getContext(),
+                            "Something gone wrong!", Toast.LENGTH_LONG).show();
+                });
     }
+
 }
