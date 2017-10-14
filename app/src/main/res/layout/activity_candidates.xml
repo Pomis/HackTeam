@@ -12,13 +12,14 @@
         android:scaleType="centerCrop"
         android:src="@drawable/bg_choose" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/spinner"
-        app:ms_background_color="@color/cardview_dark_background"
-        app:ms_text_color="@color/colorAccent"
-        android:textSize="26.7sp"
+    <TextView
+        android:id="@+id/tv_pages"
+        android:textColor="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_height="wrap_content" />
 
     <com.mindorks.placeholderview.PlaceHolderView
         android:id="@+id/candidatesView"
@@ -27,13 +28,12 @@
         android:layout_marginTop="64dp"
         android:orientation="horizontal" />
 
-    <Button
-        android:id="@+id/b_send"
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/spinner"
+        app:ms_background_color="@color/cardview_dark_background"
+        app:ms_text_color="@color/colorAccent"
+        android:textSize="26.7sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:background="@drawable/bg_role"
-        android:text="Send an invitation" />
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

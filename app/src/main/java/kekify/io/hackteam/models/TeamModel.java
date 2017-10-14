@@ -5,14 +5,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.mindorks.placeholderview.PlaceHolderView;
 import com.mindorks.placeholderview.annotations.Click;
-import com.mindorks.placeholderview.annotations.Layout;
-import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
@@ -22,14 +19,10 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Created by djavid on 14.10.17.
+ * Created by romanismagilov on 15.10.17.
  */
 
-
-//@Animate(Animation.CARD_LEFT_IN_DESC)
-@NonReusable
-@Layout(R.layout.item_candidate)
-public class CandidatesItem {
+public class TeamModel {
     @View(R.id.iv_avatar)
     private ImageView iv_avatar;
 
@@ -60,7 +53,7 @@ public class CandidatesItem {
     private String roles;
 
 
-    public CandidatesItem(int avatarUrl, Context context, PlaceHolderView placeHolderView,
+    public TeamModel(int avatarUrl, Context context, PlaceHolderView placeHolderView,
                           String name, String surname, String skills, String roles) {
         this.avatarUrl = avatarUrl;
         this.context = context;
@@ -89,5 +82,4 @@ public class CandidatesItem {
         bInvite.setVisibility(GONE);
         bInvited.setVisibility(VISIBLE);
     }
-
 }
