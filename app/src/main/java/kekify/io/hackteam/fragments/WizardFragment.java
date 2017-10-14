@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import kekify.io.hackteam.R;
 import kekify.io.hackteam.activities.CandidatesActivity;
+import kekify.io.hackteam.activities.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +56,7 @@ public class WizardFragment extends Fragment {
 
     @OnClick(R.id.b_next)
     void onClick() {
-        Intent intent = new Intent(getContext(), CandidatesActivity.class);
+        Intent intent = new Intent(getContext(), LoginActivity.class);
 
         startActivity(intent);
 
