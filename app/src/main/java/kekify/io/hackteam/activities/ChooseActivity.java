@@ -141,13 +141,14 @@ public class ChooseActivity extends AppCompatActivity {
 
             case ROLES:
                 Project project = new Project(metIdea.getText().toString(), roles);
-                bNextStep.setEnabled(false);
-                spinKit.setVisibility(View.VISIBLE);
-                bNextStep.setVisibility(GONE);
+
                 int id = App.getAppInstance().getPreferencesWrapper().getId();
                 DataRepository repository = new DataRepository();
                 String access_token = App.getAppInstance().getPreferencesWrapper().getAuthToken("twist");
-                if (roles.size() > 0)
+                if (roles.size() > 0) {
+                    bNextStep.setEnabled(false);
+                    spinKit.setVisibility(View.VISIBLE);
+                    bNextStep.setVisibility(GONE);
                     repository.createProject(project, id)
                             .compose(RxUtils.applySingleSchedulers())
                             .subscribe(projectId -> {
@@ -159,7 +160,7 @@ public class ChooseActivity extends AppCompatActivity {
                                         .subscribe(workspace -> {
                                             bNextStep.setEnabled(true);
                                             spinKit.setVisibility(View.GONE);
-                                            //bNextStep.setVisibility(View.VISIBLE);
+                                            bNextStep.setVisibility(View.VISIBLE);
                                             App.getAppInstance().getPreferencesWrapper().setWorkspaceId(workspace.getId());
                                             System.out.println("Set workspace id" + workspace.getId());
                                             CandidatesActivity.start(this, roles);
@@ -171,6 +172,8 @@ public class ChooseActivity extends AppCompatActivity {
                                 Toast.makeText(this.getApplicationContext(),
                                         "Something gone wrong!", Toast.LENGTH_LONG).show();
                             });
+                }
+
 
 
                 break;
@@ -210,7 +213,7 @@ public class ChooseActivity extends AppCompatActivity {
             case ROLES:
                 moveToFront(llIdeaFirst, 0);
                 moveAway(llIdeaSecond, 0);
-                moveAway(bNextStep, 50);
+                moveAway(spinKit, 50);
                 currentState = IDEA;
                 break;
 
