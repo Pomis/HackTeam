@@ -1,6 +1,8 @@
 package kekify.io.hackteam.models;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -87,5 +89,9 @@ public class TeamModel {
     private void onCardClick() {
         bInvite.setVisibility(GONE);
         bInvited.setVisibility(VISIBLE);
+        String url = "https://twistapp.com/";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        context.startActivity(i);
     }
 }
