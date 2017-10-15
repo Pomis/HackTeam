@@ -2,13 +2,10 @@ package kekify.io.hackteam.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.mindorks.placeholderview.PlaceHolderView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -32,7 +30,9 @@ import kekify.io.hackteam.R;
 import kekify.io.hackteam.RxUtils;
 import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.RoleItem;
+import kekify.io.hackteam.models.TeamModel;
 
+import static android.view.View.GONE;
 import static kekify.io.hackteam.activities.ChooseActivity.State.CHOOSE;
 import static kekify.io.hackteam.activities.ChooseActivity.State.IDEA;
 import static kekify.io.hackteam.activities.ChooseActivity.State.ROLES;
@@ -59,6 +59,10 @@ public class ChooseActivity extends AppCompatActivity {
     PlaceHolderView phvRoles;
     @BindView(R.id.ll_idea_second)
     LinearLayout llIdeaSecond;
+    @BindView(R.id.phv_invites)
+    PlaceHolderView phvInvites;
+    @BindView(R.id.spin_kit)
+    SpinKitView spinKit;
 
 
     enum State {
@@ -90,8 +94,26 @@ public class ChooseActivity extends AppCompatActivity {
         moveAway(rlSolo, 50);
         moveAway(rlGroup, 0);
 
-        moveToFront(tvEmpty, 150);
-        moveToFront(tvSoon, 100);
+        TeamModel model = new TeamModel(R.drawable.avatar2, this, phvInvites, "Tony Mantana's Team",
+                "I want to do Car-sharing Real Time Mobile App for the Berlin reality."
+        );
+        DataRepository repository = new DataRepository();
+        repository.getInvitations(App.getAppInstance().getPreferencesWrapper().getId())
+                .compose(RxUtils.applySingleSchedulers())
+                .subscribe(list -> {
+                    if (list != null && list.size() > 0) {
+                        model.setRoles(list.get(0).role);
+                        model.setDescription(list.get(0).project.getDescription());
+                        ArrayList<TeamModel> invites = new ArrayList<>();
+                        invites.add(model);
+                        moveToFront(phvInvites, 0);
+                        phvInvites.addView(invites.get(0));
+                    } else {
+                        moveToFront(tvEmpty, 150);
+                        moveToFront(tvSoon, 100);
+                    }
+                });
+
 
     }
 
@@ -123,27 +145,35 @@ public class ChooseActivity extends AppCompatActivity {
                 int id = App.getAppInstance().getPreferencesWrapper().getId();
                 DataRepository repository = new DataRepository();
                 String access_token = App.getAppInstance().getPreferencesWrapper().getAuthToken("twist");
+                if (roles.size() > 0) {
+                    bNextStep.setEnabled(false);
+                    spinKit.setVisibility(View.VISIBLE);
+                    bNextStep.setVisibility(GONE);
+                    repository.createProject(project, id)
+                            .compose(RxUtils.applySingleSchedulers())
+                            .subscribe(projectId -> {
+                                System.out.println("Set projectId" + project);
+                                App.getAppInstance().getPreferencesWrapper().setProjectId(projectId);
 
-                repository.createProject(project, id)
-                        .compose(RxUtils.applySingleSchedulers())
-                        .subscribe(projectId -> {
-                            System.out.println("Set projectId" + project);
-                            App.getAppInstance().getPreferencesWrapper().setProjectId(projectId);
+                                repository.addWorkspace(access_token, "my_workspace" + new Random().nextInt(1000))
+                                        .compose(RxUtils.applySingleSchedulers())
+                                        .subscribe(workspace -> {
+                                            bNextStep.setEnabled(true);
+                                            spinKit.setVisibility(View.GONE);
+                                            bNextStep.setVisibility(View.VISIBLE);
+                                            App.getAppInstance().getPreferencesWrapper().setWorkspaceId(workspace.getId());
+                                            System.out.println("Set workspace id" + workspace.getId());
+                                            CandidatesActivity.start(this, roles);
+                                        }, error -> {
+                                            error.printStackTrace();
+                                        });
+                            }, error -> {
+                                error.printStackTrace();
+                                Toast.makeText(this.getApplicationContext(),
+                                        "Something gone wrong!", Toast.LENGTH_LONG).show();
+                            });
+                }
 
-                            repository.addWorkspace(access_token, "my_workspace" + new Random().nextInt(1000))
-                                    .compose(RxUtils.applySingleSchedulers())
-                                    .subscribe(workspace -> {
-                                        App.getAppInstance().getPreferencesWrapper().setWorkspaceId(workspace.getId());
-                                        System.out.println("Set workspace id" + workspace.getId());
-                                        CandidatesActivity.start(this, roles);
-                                    }, error -> {
-                                        error.printStackTrace();
-                                    });
-                        }, error -> {
-                            error.printStackTrace();
-                            Toast.makeText(this.getApplicationContext(),
-                                    "Something gone wrong!", Toast.LENGTH_LONG).show();
-                        });
 
 
                 break;
@@ -158,11 +188,36 @@ public class ChooseActivity extends AppCompatActivity {
                 moveToFront(rlSolo, 50);
                 moveToFront(rlGroup, 0);
 
+
                 moveAway(tvEmpty, 150);
                 moveAway(tvSoon, 100);
+                moveAway(phvInvites, 0);
 
                 currentState = CHOOSE;
                 break;
+
+            case IDEA:
+                moveToFront(tvLabel, 150);
+                moveToFront(rlSolo, 50);
+                moveToFront(rlGroup, 0);
+
+
+                moveAway(llIdeaFirst, 50);
+                moveAway(bNextStep, 0);
+
+
+                currentState = CHOOSE;
+
+                break;
+
+            case ROLES:
+                moveToFront(llIdeaFirst, 0);
+                moveAway(llIdeaSecond, 0);
+                moveAway(spinKit, 50);
+                currentState = IDEA;
+                break;
+
+
         }
     }
 

@@ -6,6 +6,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.AccessTokenResponse;
+import kekify.io.hackteam.models.Invitation;
 import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.TwistUser;
 import kekify.io.hackteam.models.User;
@@ -50,6 +51,11 @@ public class DataRepository {
         return apiInterface.searchCandidates(projectId);
     }
 
+
+    public Single<List<Invitation>> getInvitations(int id) {
+        return apiInterface.getInvitations(id);
+    }
+
     public Completable sendInvitation(int project_id, String role, int user_id) {
         return apiInterface.sendInvitation(project_id, role, user_id);
     }
@@ -60,6 +66,7 @@ public class DataRepository {
 
     public Single<Workspace> addUser(String access_token, int id, String email) {
         return apiInterface.addUser("Bearer " + access_token, id, email);
+
     }
 
 }

@@ -12,6 +12,18 @@
         android:scaleType="centerCrop"
         android:src="@drawable/bg_choose" />
 
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.WanderingCubes"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:SpinKit_Color="@color/colorAccent" />
+
     <TextView
         android:id="@+id/tv_label"
         android:layout_width="match_parent"
@@ -164,6 +176,12 @@
         android:textColor="#ffffff"
         android:textSize="26.7sp"
         android:translationX="1500dp" />
+
+    <com.mindorks.placeholderview.PlaceHolderView
+        android:id="@+id/phv_invites"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationX="1500dp"/>
 
     <LinearLayout
         android:id="@+id/ll_idea_second"
