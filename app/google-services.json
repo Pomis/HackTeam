@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "459378203684",
+    "firebase_url": "https://hackteam-ad714.firebaseio.com",
+    "project_id": "hackteam-ad714",
+    "storage_bucket": "hackteam-ad714.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459378203684:android:3c42d03e9f293a07",
+        "android_client_info": {
+          "package_name": "kekify.io.hackteam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459378203684-65rf31kvlef04d4kd6vh89jhb02rj539.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kekify.io.hackteam",
+            "certificate_hash": "08f348669ec8430a6ff5bb218497580e28ba54b1"
+          }
+        },
+        {
+          "client_id": "459378203684-ki9f5hhc0let6fk2ahf0j0f1g6v36nme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaDY9xy9Dz36g0ZktemV0wQ2o7fuYBngw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459378203684-ki9f5hhc0let6fk2ahf0j0f1g6v36nme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

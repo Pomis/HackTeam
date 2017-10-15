@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import kekify.io.hackteam.App;
 import kekify.io.hackteam.R;
 
@@ -22,5 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (App.getAppInstance().getPreferencesWrapper().getId() != -1) {
             ChooseActivity.start(this);
         }
+
+        System.out.println("Token _____________ " + FirebaseInstanceId.getInstance().getToken());
     }
 }
