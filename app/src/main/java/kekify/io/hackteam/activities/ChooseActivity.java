@@ -2,10 +2,13 @@ package kekify.io.hackteam.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.mindorks.placeholderview.PlaceHolderView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -141,19 +145,30 @@ public class ChooseActivity extends AppCompatActivity {
 
                 int id = App.getAppInstance().getPreferencesWrapper().getId();
                 DataRepository repository = new DataRepository();
+                String access_token = App.getAppInstance().getPreferencesWrapper().getAuthToken("twist");
 
                 repository.createProject(project, id)
                         .compose(RxUtils.applySingleSchedulers())
                         .subscribe(projectId -> {
                             System.out.println("Set projectId" + project);
                             App.getAppInstance().getPreferencesWrapper().setProjectId(projectId);
+
+                            repository.addWorkspace(access_token, "my_workspace" + new Random().nextInt(1000))
+                                    .compose(RxUtils.applySingleSchedulers())
+                                    .subscribe(workspace -> {
+                                        App.getAppInstance().getPreferencesWrapper().setWorkspaceId(workspace.getId());
+                                        System.out.println("Set workspace id" + workspace.getId());
+                                        CandidatesActivity.start(this, roles);
+                                    }, error -> {
+                                        error.printStackTrace();
+                                    });
                         }, error -> {
                             error.printStackTrace();
                             Toast.makeText(this.getApplicationContext(),
                                     "Something gone wrong!", Toast.LENGTH_LONG).show();
                         });
 
-                CandidatesActivity.start(this, roles);
+
                 break;
         }
     }
@@ -203,6 +218,6 @@ public class ChooseActivity extends AppCompatActivity {
         phvRoles.addView(new RoleItem("Back-end dev", this, roles));
         phvRoles.addView(new RoleItem("ML/DL dev", this, roles));
         phvRoles.addView(new RoleItem("Blockchain dev", this, roles));
-
     }
+
 }

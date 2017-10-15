@@ -150,8 +150,6 @@ public class WizardFragment extends Fragment {
         user.setTwist_email(App.getAppInstance().getPreferencesWrapper().getEmail());
         user.setTwist_id(App.getAppInstance().getPreferencesWrapper().getTwistId());
 
-        System.out.println(user);
-
         createUser(user);
 
         ChooseActivity.start(getContext());

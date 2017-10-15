@@ -30,7 +30,7 @@ public class PreferencesWrapper {
     }
 
     public Integer getId() {
-        return sharedPreferences.getInt("id", 0);
+        return sharedPreferences.getInt("id", -1);
     }
     public void setId(Integer id) {
         sharedPreferences
@@ -54,5 +54,23 @@ public class PreferencesWrapper {
         sharedPreferences
                 .edit()
                 .putInt("projectId", projectId).apply();
+    }
+
+    public Integer getWorkspace() {
+        return sharedPreferences.getInt("default_workspace", 0);
+    }
+    public void setWorkspace(int workspace) {
+        sharedPreferences
+                .edit()
+                .putInt("default_workspace", workspace).apply();
+    }
+
+    public Integer getWorkspaceId() {
+        return sharedPreferences.getInt("workspace_id", 0);
+    }
+    public void setWorkspaceId(int workspace) {
+        sharedPreferences
+                .edit()
+                .putInt("workspace_id", workspace).apply();
     }
 }
