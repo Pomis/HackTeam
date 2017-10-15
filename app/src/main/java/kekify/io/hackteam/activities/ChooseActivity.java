@@ -21,6 +21,7 @@ import com.mindorks.placeholderview.PlaceHolderView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -121,19 +122,30 @@ public class ChooseActivity extends AppCompatActivity {
 
                 int id = App.getAppInstance().getPreferencesWrapper().getId();
                 DataRepository repository = new DataRepository();
+                String access_token = App.getAppInstance().getPreferencesWrapper().getAuthToken("twist");
 
                 repository.createProject(project, id)
                         .compose(RxUtils.applySingleSchedulers())
                         .subscribe(projectId -> {
                             System.out.println("Set projectId" + project);
                             App.getAppInstance().getPreferencesWrapper().setProjectId(projectId);
+
+                            repository.addWorkspace(access_token, "my_workspace" + new Random().nextInt(1000))
+                                    .compose(RxUtils.applySingleSchedulers())
+                                    .subscribe(workspace -> {
+                                        App.getAppInstance().getPreferencesWrapper().setWorkspaceId(workspace.getId());
+                                        System.out.println("Set workspace id" + workspace.getId());
+                                        CandidatesActivity.start(this, roles);
+                                    }, error -> {
+                                        error.printStackTrace();
+                                    });
                         }, error -> {
                             error.printStackTrace();
                             Toast.makeText(this.getApplicationContext(),
                                     "Something gone wrong!", Toast.LENGTH_LONG).show();
                         });
 
-                CandidatesActivity.start(this, roles);
+
                 break;
         }
     }

@@ -65,10 +65,11 @@ public class CandidatesItem {
     private List<String> roles;
     private int id;
     private String role;
+    private String email;
 
 
     public CandidatesItem(Context context, PlaceHolderView placeHolderView, String fullname,
-                          String skills, List<String> roles, int id, String role) {
+                          String skills, List<String> roles, int id, String role, String email) {
         this.context = context;
         this.placeHolderView = placeHolderView;
         this.fullname = fullname;
@@ -76,6 +77,7 @@ public class CandidatesItem {
         this.roles = roles;
         this.id = id;
         this.role = role;
+        this.email = email;
     }
 
     @Resolve
@@ -112,6 +114,15 @@ public class CandidatesItem {
         repository.sendInvitation(project_id, role, id)
                 .compose(RxUtils.applyCompletableSchedulers())
                 .subscribe(() -> {}, Throwable::printStackTrace);
+
+        String token = App.getAppInstance().getPreferencesWrapper().getAuthToken("twist");
+        int ws_id = App.getAppInstance().getPreferencesWrapper().getWorkspaceId();
+
+        repository.addUser(token, ws_id, email)
+                .compose(RxUtils.applySingleSchedulers())
+                .subscribe(workspace -> {
+                    System.out.println("Added user with email: " + email);
+                }, Throwable::printStackTrace);
     }
 
 }

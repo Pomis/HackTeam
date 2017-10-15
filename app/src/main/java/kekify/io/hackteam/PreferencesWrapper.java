@@ -55,4 +55,22 @@ public class PreferencesWrapper {
                 .edit()
                 .putInt("projectId", projectId).apply();
     }
+
+    public Integer getWorkspace() {
+        return sharedPreferences.getInt("default_workspace", 0);
+    }
+    public void setWorkspace(int workspace) {
+        sharedPreferences
+                .edit()
+                .putInt("default_workspace", workspace).apply();
+    }
+
+    public Integer getWorkspaceId() {
+        return sharedPreferences.getInt("workspace_id", 0);
+    }
+    public void setWorkspaceId(int workspace) {
+        sharedPreferences
+                .edit()
+                .putInt("workspace_id", workspace).apply();
+    }
 }

@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String url = "https://twistapp.com/oauth/authorize?";
         loadUrl(url + "client_id=" + App.TWIST_CLIENT_ID
-         + "&scope=" + "messages:read&state=state");
+         + "&scope=" + "messages:read,workspaces:write,workspaces:read&state=state");
     }
 
     private void setupWebView() {
@@ -151,8 +151,10 @@ public class LoginActivity extends AppCompatActivity {
                             .subscribe(user -> {
                                 App.getAppInstance().getPreferencesWrapper().setEmail(user.getEmail());
                                 App.getAppInstance().getPreferencesWrapper().setTwistId(user.getId());
+                                App.getAppInstance().getPreferencesWrapper().setWorkspace(user.getDefault_workspace());
                                 System.out.println("Set email:" + user.getEmail());
                                 System.out.println("Set twistId:" + user.getId());
+                                System.out.println("Set default_workspace:" + user.getDefault_workspace());
                             });
 
                 }, error -> {

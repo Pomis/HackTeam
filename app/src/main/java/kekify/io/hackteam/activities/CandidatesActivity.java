@@ -119,7 +119,7 @@ public class CandidatesActivity extends AppCompatActivity {
                             if (role.equals(selected)) {
                                 CandidatesItem item = new CandidatesItem(this.getApplicationContext(),
                                         candidatesView, user.getName(), user.getSkills(),
-                                        user.getRoles(), user.getId(), selected);
+                                        user.getRoles(), user.getId(), selected, user.getTwist_email());
 
                                 candidatesView.addView(item);
 

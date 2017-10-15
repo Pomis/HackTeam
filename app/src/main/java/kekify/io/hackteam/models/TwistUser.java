@@ -13,6 +13,10 @@ public class TwistUser {
     @Expose
     private String email;
 
+    @SerializedName("default_workspace")
+    @Expose
+    private int default_workspace;
+
     public TwistUser(int id, String email) {
         this.id = id;
         this.email = email;
@@ -30,5 +34,12 @@ public class TwistUser {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getDefault_workspace() {
+        return default_workspace;
+    }
+    public void setDefault_workspace(int default_workspace) {
+        this.default_workspace = default_workspace;
     }
 }
