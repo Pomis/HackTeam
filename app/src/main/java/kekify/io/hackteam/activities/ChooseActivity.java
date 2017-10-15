@@ -2,13 +2,10 @@ package kekify.io.hackteam.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.mindorks.placeholderview.PlaceHolderView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -30,12 +28,11 @@ import kekify.io.hackteam.App;
 import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
 import kekify.io.hackteam.RxUtils;
-import kekify.io.hackteam.models.CandidatesItem;
 import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.RoleItem;
 import kekify.io.hackteam.models.TeamModel;
-import kekify.io.hackteam.models.User;
 
+import static android.view.View.GONE;
 import static kekify.io.hackteam.activities.ChooseActivity.State.CHOOSE;
 import static kekify.io.hackteam.activities.ChooseActivity.State.IDEA;
 import static kekify.io.hackteam.activities.ChooseActivity.State.ROLES;
@@ -64,6 +61,8 @@ public class ChooseActivity extends AppCompatActivity {
     LinearLayout llIdeaSecond;
     @BindView(R.id.phv_invites)
     PlaceHolderView phvInvites;
+    @BindView(R.id.spin_kit)
+    SpinKitView spinKit;
 
 
     enum State {
@@ -142,31 +141,36 @@ public class ChooseActivity extends AppCompatActivity {
 
             case ROLES:
                 Project project = new Project(metIdea.getText().toString(), roles);
-
+                bNextStep.setEnabled(false);
+                spinKit.setVisibility(View.VISIBLE);
+                bNextStep.setVisibility(GONE);
                 int id = App.getAppInstance().getPreferencesWrapper().getId();
                 DataRepository repository = new DataRepository();
                 String access_token = App.getAppInstance().getPreferencesWrapper().getAuthToken("twist");
+                if (roles.size() > 0)
+                    repository.createProject(project, id)
+                            .compose(RxUtils.applySingleSchedulers())
+                            .subscribe(projectId -> {
+                                System.out.println("Set projectId" + project);
+                                App.getAppInstance().getPreferencesWrapper().setProjectId(projectId);
 
-                repository.createProject(project, id)
-                        .compose(RxUtils.applySingleSchedulers())
-                        .subscribe(projectId -> {
-                            System.out.println("Set projectId" + project);
-                            App.getAppInstance().getPreferencesWrapper().setProjectId(projectId);
-
-                            repository.addWorkspace(access_token, "my_workspace" + new Random().nextInt(1000))
-                                    .compose(RxUtils.applySingleSchedulers())
-                                    .subscribe(workspace -> {
-                                        App.getAppInstance().getPreferencesWrapper().setWorkspaceId(workspace.getId());
-                                        System.out.println("Set workspace id" + workspace.getId());
-                                        CandidatesActivity.start(this, roles);
-                                    }, error -> {
-                                        error.printStackTrace();
-                                    });
-                        }, error -> {
-                            error.printStackTrace();
-                            Toast.makeText(this.getApplicationContext(),
-                                    "Something gone wrong!", Toast.LENGTH_LONG).show();
-                        });
+                                repository.addWorkspace(access_token, "my_workspace" + new Random().nextInt(1000))
+                                        .compose(RxUtils.applySingleSchedulers())
+                                        .subscribe(workspace -> {
+                                            bNextStep.setEnabled(true);
+                                            spinKit.setVisibility(View.GONE);
+                                            //bNextStep.setVisibility(View.VISIBLE);
+                                            App.getAppInstance().getPreferencesWrapper().setWorkspaceId(workspace.getId());
+                                            System.out.println("Set workspace id" + workspace.getId());
+                                            CandidatesActivity.start(this, roles);
+                                        }, error -> {
+                                            error.printStackTrace();
+                                        });
+                            }, error -> {
+                                error.printStackTrace();
+                                Toast.makeText(this.getApplicationContext(),
+                                        "Something gone wrong!", Toast.LENGTH_LONG).show();
+                            });
 
 
                 break;
@@ -188,6 +192,29 @@ public class ChooseActivity extends AppCompatActivity {
 
                 currentState = CHOOSE;
                 break;
+
+            case IDEA:
+                moveToFront(tvLabel, 150);
+                moveToFront(rlSolo, 50);
+                moveToFront(rlGroup, 0);
+
+
+                moveAway(llIdeaFirst, 50);
+                moveAway(bNextStep, 0);
+
+
+                currentState = CHOOSE;
+
+                break;
+
+            case ROLES:
+                moveToFront(llIdeaFirst, 0);
+                moveAway(llIdeaSecond, 0);
+                moveAway(bNextStep, 50);
+                currentState = IDEA;
+                break;
+
+
         }
     }
 

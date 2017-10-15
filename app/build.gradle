@@ -37,6 +37,7 @@ dependencies {
     compile 'com.splitwise:tokenautocomplete:2.0.8@aar'
     compile 'rongi.rotate-layout:rotate-layout:3.0.0'
     compile 'com.jaredrummler:material-spinner:1.2.1'
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
 
 
     testCompile 'junit:junit:4.12'
