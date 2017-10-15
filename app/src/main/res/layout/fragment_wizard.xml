@@ -23,10 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="130dp"
             android:gravity="center_horizontal"
             android:lineSpacingExtra="10.7sp"
-            android:text="Welcome to hackTeam \nNice to meet you:"
+            android:text="Welcome to hackTeamm\nNice to meet you:"
             android:textColor="#ffffff"
             android:textSize="26.7sp" />
 
@@ -36,8 +36,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_label"
             android:layout_marginLeft="16dp"
+            android:fontFamily="sans-serif-light"
             android:layout_marginRight="24dp"
+            android:layout_marginTop="63dp"
             android:hint="Full name"
+            android:textSize="20sp"
             android:paddingBottom="-8dp"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
@@ -70,7 +73,7 @@
             android:layout_marginTop="30dp"
             android:gravity="center_horizontal"
             android:lineSpacingExtra="10.7sp"
-            android:text="Let’s tell us about yourself \nChoose your team role:"
+            android:text="Let’s tell us about yourself . Choose your team role:"
             android:textColor="#ffffff"
             android:textSize="26.7sp" />
 
@@ -96,15 +99,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="130dp"
             android:gravity="center_horizontal"
             android:lineSpacingExtra="10.7sp"
+            android:hint="e.g. Docker"
             android:text="Choose your skills"
             android:textColor="#ffffff"
             android:textSize="26.7sp" />
 
         <kekify.io.hackteam.SkillsCompletionView
             android:id="@+id/searchView"
+            android:layout_marginTop="64dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorAccent" />
