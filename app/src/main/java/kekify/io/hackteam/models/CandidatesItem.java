@@ -19,7 +19,10 @@ import com.mindorks.placeholderview.annotations.View;
 import java.io.File;
 import java.util.List;
 
+import kekify.io.hackteam.App;
+import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
+import kekify.io.hackteam.RxUtils;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -60,14 +63,19 @@ public class CandidatesItem {
     private String fullname;
     private String skills;
     private List<String> roles;
+    private int id;
+    private String role;
 
 
-    public CandidatesItem(Context context, PlaceHolderView placeHolderView, String fullname, String skills, List<String> roles) {
+    public CandidatesItem(Context context, PlaceHolderView placeHolderView, String fullname,
+                          String skills, List<String> roles, int id, String role) {
         this.context = context;
         this.placeHolderView = placeHolderView;
         this.fullname = fullname;
         this.skills = skills;
         this.roles = roles;
+        this.id = id;
+        this.role = role;
     }
 
     @Resolve
@@ -95,6 +103,15 @@ public class CandidatesItem {
     private void onCardClick() {
         bInvite.setVisibility(GONE);
         bInvited.setVisibility(VISIBLE);
+
+        System.out.println("UserId " + id);
+        int project_id = App.getAppInstance().getPreferencesWrapper().getProjectId();
+
+
+        DataRepository repository = new DataRepository();
+        repository.sendInvitation(project_id, role, id)
+                .compose(RxUtils.applyCompletableSchedulers())
+                .subscribe(() -> {}, Throwable::printStackTrace);
     }
 
 }

@@ -37,7 +37,6 @@ public class CandidatesActivity extends AppCompatActivity {
 
     LinearLayoutManager lm;
 
-
     private String selected;
 
     public static void start(Context context, ArrayList<String> roles) {
@@ -83,9 +82,12 @@ public class CandidatesActivity extends AppCompatActivity {
 
         msRoles.setItems(getIntent().getStringArrayListExtra("arr"));
         selected = getIntent().getStringArrayListExtra("arr").get(0);
+        getCandidates();
+
         msRoles.setOnItemSelectedListener((view, position, id, item) -> {
-            Toast.makeText(this, item.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show();
             selected = item.toString();
+            candidatesView.removeAllViews();
             getCandidates();
         });
     }
@@ -111,10 +113,17 @@ public class CandidatesActivity extends AppCompatActivity {
                 .compose(RxUtils.applySingleSchedulers())
                 .subscribe(list -> {
                     for (User user: list) {
+                        //System.out.print(" (1)(" + user.getName() + " " + user.getId() + ") ");
                         for (String role: user.getRoles()) {
+                            //System.out.print(" (2)(" + role + ") ");
                             if (role.equals(selected)) {
-                                candidatesView.addView(new CandidatesItem(this.getApplicationContext(),
-                                        candidatesView, user.getName(), user.getSkills(), user.getRoles()));
+                                CandidatesItem item = new CandidatesItem(this.getApplicationContext(),
+                                        candidatesView, user.getName(), user.getSkills(),
+                                        user.getRoles(), user.getId(), selected);
+
+                                candidatesView.addView(item);
+
+                                break;
                             }
                         }
                     }

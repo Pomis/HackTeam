@@ -48,4 +48,8 @@ public class DataRepository {
         return apiInterface.searchCandidates(projectId);
     }
 
+    public Completable sendInvitation(int project_id, String role, int user_id) {
+        return apiInterface.sendInvitation(project_id, role, user_id);
+    }
+
 }

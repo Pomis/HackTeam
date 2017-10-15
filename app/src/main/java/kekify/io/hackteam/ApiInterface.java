@@ -38,4 +38,8 @@ public interface ApiInterface {
     @GET("http://hack-team.azurewebsites.net/api/Search")
     Single<List<User>> searchCandidates(@Query("id") Integer projectId);
 
+    @FormUrlEncoded
+    @POST("http://hack-team.azurewebsites.net/api/invations")
+    Completable sendInvitation(@Field("project_id") int project_id, @Field("role") String role,
+                               @Field("user_id") int user_id);
 }

@@ -2,10 +2,13 @@ package kekify.io.hackteam.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
@@ -178,6 +181,6 @@ public class ChooseActivity extends AppCompatActivity {
         phvRoles.addView(new RoleItem("Back-end dev", this, roles));
         phvRoles.addView(new RoleItem("ML/DL dev", this, roles));
         phvRoles.addView(new RoleItem("Blockchain dev", this, roles));
-
     }
+
 }
