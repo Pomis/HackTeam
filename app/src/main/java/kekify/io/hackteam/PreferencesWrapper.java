@@ -30,7 +30,7 @@ public class PreferencesWrapper {
     }
 
     public Integer getId() {
-        return sharedPreferences.getInt("id", 0);
+        return sharedPreferences.getInt("id", -1);
     }
     public void setId(Integer id) {
         sharedPreferences
