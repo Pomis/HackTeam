@@ -169,6 +169,7 @@ public class WizardFragment extends Fragment {
             case ROLE:
                 currentStep = KEYWORDS;
                 swap(llSecond, llThird);
+                searchView.setFocusableInTouchMode(true);
                 searchView.requestFocus();
                 break;
 

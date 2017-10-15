@@ -26,7 +26,8 @@
         </activity>
         <activity android:name=".activities.CandidatesActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.ChooseActivity"></activity>
+        <activity android:name=".activities.ChooseActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
