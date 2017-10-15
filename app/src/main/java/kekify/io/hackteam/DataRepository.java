@@ -6,6 +6,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.AccessTokenResponse;
+import kekify.io.hackteam.models.Invitation;
 import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.TwistUser;
 import kekify.io.hackteam.models.User;
@@ -46,6 +47,10 @@ public class DataRepository {
 
     public Single<List<User>> searchCandidates(Integer projectId) {
         return apiInterface.searchCandidates(projectId);
+    }
+
+    public Single<List<Invitation>> getInvitations(int id) {
+        return apiInterface.getInvitations(id);
     }
 
 }

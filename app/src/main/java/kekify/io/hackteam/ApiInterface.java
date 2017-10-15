@@ -6,6 +6,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import kekify.io.hackteam.models.AccessTokenRequest;
 import kekify.io.hackteam.models.AccessTokenResponse;
+import kekify.io.hackteam.models.Invitation;
 import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.TwistUser;
 import kekify.io.hackteam.models.User;
@@ -37,5 +38,8 @@ public interface ApiInterface {
 
     @GET("http://hack-team.azurewebsites.net/api/Search")
     Single<List<User>> searchCandidates(@Query("id") Integer projectId);
+
+    @GET("http://hack-team.azurewebsites.net/api/invations")
+    Single<List<Invitation>> getInvitations(@Query("user") int id);
 
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_candidates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent">
+
+            <RelativeLayout
+                android:id="@+id/rv_namephoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/avatar" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_avatar"
+                    android:layout_toRightOf="@+id/iv_avatar"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@id/iv_avatar"
+                        android:text="Tony Mantana's team"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_roles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_name"
+                        android:layout_toEndOf="@+id/iv_avatar"
+                        android:layout_toRightOf="@+id/iv_avatar"
+                        android:textColor="@color/colorBlack"
+                        android:text="Designer, Manager" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_skills_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rv_namephoto"
+                android:layout_marginLeft="16dp"
+                android:text="Idea:"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_skills"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <TextView
+                android:id="@+id/tv_descr"
+                android:layout_width="match_parent"
+                android:textColor="#000"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_skills_label"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/b_invited"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/bg_invited"
+        android:text="Approved" />
+    <Button
+        android:id="@+id/b_invite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/bg_role"
+        android:text="Approve your membership" />
+
+</RelativeLayout>

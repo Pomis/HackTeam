@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.mindorks.placeholderview.PlaceHolderView;
 import com.mindorks.placeholderview.annotations.Click;
+import com.mindorks.placeholderview.annotations.Layout;
+import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
@@ -21,7 +23,8 @@ import static android.view.View.VISIBLE;
 /**
  * Created by romanismagilov on 15.10.17.
  */
-
+@NonReusable
+@Layout(R.layout.item_invite)
 public class TeamModel {
     @View(R.id.iv_avatar)
     private ImageView iv_avatar;
@@ -32,49 +35,52 @@ public class TeamModel {
     @View(R.id.tv_roles)
     private TextView tvRoles;
 
-    @View(R.id.phv_roles)
-    private PlaceHolderView phvRoles;
-
-    @View(R.id.phv_skills)
-    private PlaceHolderView phvSkills;
-
     @View(R.id.b_invite)
     private Button bInvite;
 
     @View(R.id.b_invited)
     private Button bInvited;
 
+    @View(R.id.tv_descr)
+    private TextView tvDescr;
+
+
+
     private int avatarUrl;
     private Context context;
     private PlaceHolderView placeHolderView;
     private String name;
-    private String surname;
-    private String skills;
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
     private String roles;
 
 
     public TeamModel(int avatarUrl, Context context, PlaceHolderView placeHolderView,
-                          String name, String surname, String skills, String roles) {
+                          String name, String description) {
         this.avatarUrl = avatarUrl;
         this.context = context;
         this.placeHolderView = placeHolderView;
         this.name = name;
-        this.surname = surname;
-        this.skills = skills;
-        this.roles = roles;
+        this.description = description;
+
     }
 
     @Resolve
     private void onResolved() {
         Glide.with(context).load(avatarUrl).apply(RequestOptions.circleCropTransform()).into(iv_avatar);
-        tv_name.setText(name + " " + surname);
+        tv_name.setText(name);
+        tvDescr.setText(description);
         tvRoles.setText(roles);
-        String[] skillArray = skills.split(";");
-        phvSkills.getBuilder().setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
 
-        for (String skill : skillArray) {
-            phvSkills.addView(new SkillItem(skill));
-        }
     }
 
     @Click(R.id.b_invite)

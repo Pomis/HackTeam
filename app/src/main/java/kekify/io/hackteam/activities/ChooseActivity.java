@@ -26,8 +26,11 @@ import kekify.io.hackteam.App;
 import kekify.io.hackteam.DataRepository;
 import kekify.io.hackteam.R;
 import kekify.io.hackteam.RxUtils;
+import kekify.io.hackteam.models.CandidatesItem;
 import kekify.io.hackteam.models.Project;
 import kekify.io.hackteam.models.RoleItem;
+import kekify.io.hackteam.models.TeamModel;
+import kekify.io.hackteam.models.User;
 
 import static kekify.io.hackteam.activities.ChooseActivity.State.CHOOSE;
 import static kekify.io.hackteam.activities.ChooseActivity.State.IDEA;
@@ -55,6 +58,8 @@ public class ChooseActivity extends AppCompatActivity {
     PlaceHolderView phvRoles;
     @BindView(R.id.ll_idea_second)
     LinearLayout llIdeaSecond;
+    @BindView(R.id.phv_invites)
+    PlaceHolderView phvInvites;
 
 
     enum State {
@@ -86,8 +91,26 @@ public class ChooseActivity extends AppCompatActivity {
         moveAway(rlSolo, 50);
         moveAway(rlGroup, 0);
 
-        moveToFront(tvEmpty, 150);
-        moveToFront(tvSoon, 100);
+        TeamModel model = new TeamModel(R.drawable.avatar2, this, phvInvites, "Tony Mantana's Team",
+                "I want to do Car-sharing Real Time Mobile App for the Berlin reality."
+        );
+        DataRepository repository = new DataRepository();
+        repository.getInvitations(App.getAppInstance().getPreferencesWrapper().getId())
+                .compose(RxUtils.applySingleSchedulers())
+                .subscribe(list -> {
+                    if (list != null && list.size() > 0) {
+                        model.setRoles(list.get(0).role);
+                        model.setDescription(list.get(0).project.getDescription());
+                        ArrayList<TeamModel> invites = new ArrayList<>();
+                        invites.add(model);
+                        moveToFront(phvInvites, 0);
+                        phvInvites.addView(invites.get(0));
+                    } else {
+                        moveToFront(tvEmpty, 150);
+                        moveToFront(tvSoon, 100);
+                    }
+                });
+
 
     }
 
@@ -143,8 +166,10 @@ public class ChooseActivity extends AppCompatActivity {
                 moveToFront(rlSolo, 50);
                 moveToFront(rlGroup, 0);
 
+
                 moveAway(tvEmpty, 150);
                 moveAway(tvSoon, 100);
+                moveAway(phvInvites, 0);
 
                 currentState = CHOOSE;
                 break;

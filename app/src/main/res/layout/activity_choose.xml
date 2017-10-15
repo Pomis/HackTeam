@@ -165,6 +165,12 @@
         android:textSize="26.7sp"
         android:translationX="1500dp" />
 
+    <com.mindorks.placeholderview.PlaceHolderView
+        android:id="@+id/phv_invites"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationX="1500dp"/>
+
     <LinearLayout
         android:id="@+id/ll_idea_second"
         android:layout_width="match_parent"
