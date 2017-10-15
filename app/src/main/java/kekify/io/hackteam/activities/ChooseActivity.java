@@ -221,6 +221,23 @@ public class ChooseActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        moveToFront(tvLabel, 0);
+        moveToFront(rlSolo, 50);
+        moveToFront(rlGroup, 0);
+
+
+        moveAway(tvEmpty, 0);
+        moveAway(tvSoon, 0);
+        moveAway(phvInvites, 0);
+        moveAway(llIdeaFirst, 0);
+        moveAway(bNextStep, 0);
+        moveAway(llIdeaSecond, 0);
+        moveAway(spinKit, 0);
+    }
+
     void moveAway(View view, int delay) {
         view.animate()
                 .translationX(-1500).setDuration(500)

@@ -82,7 +82,40 @@ public class CandidatesItem {
 
     @Resolve
     private void onResolved() {
-        //Glide.with(context).load(avatarUrl).apply(RequestOptions.circleCropTransform()).into(iv_avatar);
+        int ran = (int) (Math.random() * 9);
+        String url = "https://kayceenilson.files.wordpress.com/2014/04/famous-people-bipolar-disorder-19.jpg";
+
+        switch (ran) {
+            case 0:
+                url = "https://kayceenilson.files.wordpress.com/2014/04/famous-people-bipolar-disorder-19.jpg";
+                break;
+            case 1:
+                url = "http://www.5588158.com/image/i.pinimg.com/736x/96/42/81/964281940996c9d3ee6aaa8330b54361--famous-portraits-mahatma-gandhi.jpg";
+                break;
+            case 2:
+                url = "http://www.ofad.org/files/imagecache/daily_picture/daily-photo/recent-and-random-portraits_8.jpg";
+                break;
+            case 3:
+                url = "http://pm1.narvii.com/5866/45cc61eb9e3eaefdc26be045e9f9fbfdf916f45b_hq.jpg";
+                break;
+            case 4:
+                url = "https://www.rockstart.com/wp-content/uploads/2012/06/bas-300x300.jpg";
+                break;
+            case 5:
+                url = "http://img.izismile.com/img/img3/20100428/640/she_makes_random_640_01.jpg";
+                break;
+            case 6:
+                url = "http://ic.pics.livejournal.com/roman_yerokhin/7052661/24455/24455_original.jpg";
+                break;
+            case 7:
+                url = "https://pp.userapi.com/c626223/v626223877/230b9/eu4GzHtQ8J4.jpg";
+                break;
+            case 8:
+                url = "https://pp.userapi.com/c604420/v604420249/1f5c4/SdFH4Wtnp4A.jpg";
+                break;
+        }
+
+        Glide.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(iv_avatar);
         tv_name.setText(fullname);
 
         String s_roles = "";
